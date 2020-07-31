@@ -3,7 +3,14 @@ Assignment:-12
 1) Write a query that selects all customers whose ratings are equal to or greater than
 ANY of Serres’.
 
-ANS:
+ANS:  SELECT * FROM customers
+      WHERE rating >=ANY
+      (SELECT rating FROM customers
+      WHERE snum IN
+         (SELECT snum
+          FROM salespeople
+          WHERE sname='serres'));
+
 
 2) Write a query using ANY or ALL that will find all salespeople who have no
 customers located in their city.
