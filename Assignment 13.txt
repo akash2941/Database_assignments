@@ -13,7 +13,12 @@ ANS:- select cname,city,'High Rating' rating from customers where rating >=200
 2) Write a command that produces the name and number of each salesperson and each customer
 with more than one current order. Put the results in alphabetical order.
 
-ANS:-
+ANS:-  SELECT sname,snum,cname FROM salespeople
+        JOIN customers using(snum)
+        WHERE snum IN
+        (SELECT snum FROM customers GROUP BY snum
+         HAVING count(snum)>1)
+         ORDER BY sname,cname;
 
 
 3) Form a union of three queries. Have the first select the snums of all salespeople in San Jose;
